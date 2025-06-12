@@ -38,8 +38,8 @@ public class GettingStartedApplication implements CommandLineRunner {
                     studentService.insert(student);
                 }
                 case 3 -> {
-                    System.out.println("Enter student id: ");
-                    Integer id = sc.nextInt();
+                    System.out.print("Enter student id: ");
+                    Integer id = Integer.parseInt(sc.nextLine());
                     Student student = studentService.selectById(id);
                     if (student != null) {
                         headerDisplay();
@@ -50,8 +50,8 @@ public class GettingStartedApplication implements CommandLineRunner {
                     }
                 }
                 case 4 -> {
-                    System.out.println("Enter student id: ");
-                    Integer id = sc.nextInt();
+                    System.out.print("Enter student id: ");
+                    Integer id = Integer.parseInt(sc.nextLine());
                     Student student = studentInput(sc, "Enter new student");
                     if(studentService.updateById(id, student)){
                         System.out.println("Student updated");
@@ -60,8 +60,8 @@ public class GettingStartedApplication implements CommandLineRunner {
                     }
                 }
                 case 5 -> {
-                    System.out.println("Enter student id: ");
-                    Integer id = sc.nextInt();
+                    System.out.print("Enter student id: ");
+                    Integer id = Integer.parseInt(sc.nextLine());
                     if(studentService.deleteById(id)){
                         System.out.println("Student deleted");
                     }else{
@@ -72,18 +72,20 @@ public class GettingStartedApplication implements CommandLineRunner {
                     return;
                 }
             }
+            System.out.print("Any key to continue...");
+            sc.nextLine();
         }while (true);
     }
 
     private Student studentInput(Scanner sc, String message) {
-        System.out.println(message + " id: ");
-        Integer id = sc.nextInt();
-        System.out.println(message + " name: ");
-        String fullName = sc.next();
-        System.out.println(message + " gender: ");
-        String gender = sc.next();
-        System.out.println(message + " score: ");
-        Double score = sc.nextDouble();
+        System.out.print(message + " id: ");
+        Integer id = Integer.parseInt(sc.nextLine());
+        System.out.print(message + " name: ");
+        String fullName = sc.nextLine();
+        System.out.print(message + " gender: ");
+        String gender = sc.nextLine();
+        System.out.print(message + " score: ");
+        Double score = Double.parseDouble(sc.nextLine());
         return new Student(id, fullName, gender, score);
     }
 
@@ -116,7 +118,11 @@ public class GettingStartedApplication implements CommandLineRunner {
         System.out.print("[+] Choose an option: ");
         int choice;
         do{
-            choice = Integer.parseInt(new Scanner(System.in).nextLine());
+            try{
+                choice = Integer.parseInt(new Scanner(System.in).nextLine());
+            }catch (Exception ignored){
+                choice = 0;
+            }
         }while (choice < 1 || choice > 6);
         return choice;
     }

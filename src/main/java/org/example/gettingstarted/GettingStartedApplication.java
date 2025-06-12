@@ -69,7 +69,7 @@ public class GettingStartedApplication implements CommandLineRunner {
                     }
                 }
                 case 6 -> {
-                    return;
+                    System.exit(0);
                 }
             }
             System.out.print("Any key to continue...");
